@@ -173,10 +173,15 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
         else:
             score1 += take_turn(strategy1(score1, score0), score1, score0, dice, goal)
             hog_pile(score1, score0)
+
+
     # END PROBLEM 5
     # (note that the indentation for the problem 7 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 7
-    "*** YOUR CODE HERE ***"
+        leader, message = say(score0, score1, leader)
+        if message:
+            print(message)
+        who = next_player(who)
     # END PROBLEM 7
     return score0, score1
 
@@ -283,7 +288,12 @@ def make_averaged(original_function, total_samples=1000):
     3.0
     """
     # BEGIN PROBLEM 8
-    "*** YOUR CODE HERE ***"
+    def averaged_function(*args):
+        total = 0
+        for _ in range(total_samples):
+            total += original_function(*args)
+        return total/total_samples
+    return averaged_function
     # END PROBLEM 8
 
 
@@ -297,7 +307,18 @@ def max_scoring_num_rolls(dice=six_sided, total_samples=1000):
     1
     """
     # BEGIN PROBLEM 9
-    "*** YOUR CODE HERE ***"
+    best_strategy = None
+    best_score = 0
+
+    for i in range(1, 11):
+        averaged_score = make_averaged(roll_dice, total_samples)
+        current_score = averaged_score(i , dice)
+
+        if current_score > best_score:
+            best_score = current_score
+            best_strategy = i
+
+    return best_strategy
     # END PROBLEM 9
 
 
@@ -338,7 +359,8 @@ def hefty_hogs_strategy(score, opponent_score, threshold=8, num_rolls=6):
     returns NUM_ROLLS otherwise.
     """
     # BEGIN PROBLEM 10
-    return 6  # Remove this line once implemented.
+    hefty_hogs_score = hefty_hogs(score, opponent_score)
+    return 0 if hefty_hogs_score >= threshold else num_rolls
     # END PROBLEM 10
 
 
@@ -348,7 +370,13 @@ def hog_pile_strategy(score, opponent_score, threshold=8, num_rolls=6):
     Otherwise, it returns NUM_ROLLS.
     """
     # BEGIN PROBLEM 11
-    return 6  # Remove this line once implemented.
+    hefty_earned_score = hefty_hogs(score, opponent_score)
+    if (score + hefty_earned_score) % 10 == opponent_score % 10 and hefty_earned_score > 0:
+        return 0
+    elif hefty_hogs_strategy(score, opponent_score, threshold, num_rolls) == 0:
+        return  0
+    else:
+        return num_rolls
     # END PROBLEM 11
 
 
@@ -358,7 +386,14 @@ def final_strategy(score, opponent_score):
     *** YOUR DESCRIPTION HERE ***
     """
     # BEGIN PROBLEM 12
-    return 6  # Remove this line once implemented.
+    best_num_rolls = max_scoring_num_rolls()
+
+    if score >= GOAL_SCORE - 8:
+        return 0
+    if score < opponent_score - 15 or score > opponent_score + 15:
+        return best_num_rolls
+    if opponent_score - 15 <= score <= opponent_score + 15:
+        return 0
     # END PROBLEM 12
 
 ##########################
