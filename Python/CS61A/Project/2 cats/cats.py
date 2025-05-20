@@ -1,5 +1,5 @@
 """Typing test implementation"""
-
+from cats_gui import similar
 from utils import lower, split, remove_punctuation, lines_from_file
 from ucb import main, interact, trace
 from datetime import datetime
@@ -90,8 +90,18 @@ def accuracy(typed, reference):
     """
     typed_words = split(typed)
     reference_words = split(reference)
-    # BEGIN PROBLEM 3
-    "*** YOUR CODE HERE ***"
+    # BEGIN PROBLEM
+    correct_count = 0
+    for x, y in zip(typed_words, reference_words):
+        if x == y:
+            correct_count += 1
+
+    if not typed_words and not reference_words:
+        return 100.0
+    elif not typed_words or not reference_words:
+        return 0.0
+    else:
+        return float(correct_count / len(typed_words)) * 100
     # END PROBLEM 3
 
 
@@ -109,7 +119,7 @@ def wpm(typed, elapsed):
     """
     assert elapsed > 0, 'Elapsed time must be positive'
     # BEGIN PROBLEM 4
-    "*** YOUR CODE HERE ***"
+    return (len(typed) / 5) / (elapsed / 60)
     # END PROBLEM 4
 
 
@@ -136,7 +146,19 @@ def autocorrect(typed_word, word_list, diff_function, limit):
     'testing'
     """
     # BEGIN PROBLEM 5
-    "*** YOUR CODE HERE ***"
+    if typed_word in word_list:
+        return typed_word
+
+    min_word = typed_word
+    min_diff = float('inf')
+
+    for word in word_list:
+        diff = diff_function(word, typed_word, limit)
+        if diff < min_diff:
+            min_diff = diff
+            min_word = word
+
+    return min_word if min_diff <= limit else typed_word
     # END PROBLEM 5
 
 
@@ -163,7 +185,16 @@ def sphinx_swaps(start, goal, limit):
     5
     """
     # BEGIN PROBLEM 6
-    assert False, 'Remove this line'
+    count = 0
+    for x , y in zip(start, goal):
+        if x != y:
+            count += 1
+            if count > limit:
+                return limit
+
+    count += abs(len(start) - len(goal))
+
+    return min(count, limit)
     # END PROBLEM 6
 
 
@@ -184,26 +215,23 @@ def minimum_mewtations(start, goal, limit):
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-    assert False, 'Remove this line'
+    if start == goal:
+       return 0
+    if limit < 0:
+       return limit + 1
+    if start == "":
+        return len(goal)
+    if goal == "":
+        return len(start)
 
-    if ______________:  # Fill in the condition
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
+    if start[0] == goal[0]:
+        return minimum_mewtations(start[1:], goal[1:], limit)
 
-    elif ___________:  # Feel free to remove or add additional cases
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
+    add = minimum_mewtations(start, goal[1:], limit - 1) + 1
+    remove = minimum_mewtations(start[1:], goal, limit - 1) - 1
+    substitute = minimum_mewtations(start[1:], goal[1:], limit - 1) + 1
 
-    else:
-        add = ...  # Fill in these lines
-        remove = ...
-        substitute = ...
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
-
+    return min(add, remove, substitute)
 
 def final_diff(start, goal, limit):
     """A diff function that takes in a string START, a string GOAL, and a number LIMIT.
