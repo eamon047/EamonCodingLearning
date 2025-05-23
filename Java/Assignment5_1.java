@@ -10,16 +10,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /** Displays a window and delegates drawing to DrawGraphics. */
-public class SimpleDraw extends JPanel implements Runnable {    
+public class Assignment5_1 extends JPanel implements Runnable {    
     private static final long serialVersionUID = -7469734580960165754L;
     private boolean animate = true;
     private final int FRAME_DELAY = 50; // 50 ms = 20 FPS
     public static final int WIDTH = 300;
     public static final int HEIGHT = 300;
-    private DrawGraphics draw;
+    private Assignment5_2 draw;
 
     
-    public SimpleDraw(DrawGraphics drawer) {
+    public Assignment5_1(Assignment5_2 drawer) {
         this.draw = drawer;
     }
 
@@ -62,7 +62,7 @@ public class SimpleDraw extends JPanel implements Runnable {
     }
 
     public static void main(String args[]) {
-        final SimpleDraw content = new SimpleDraw(new DrawGraphics());
+        final Assignment5_1 content = new Assignment5_1(new Assignment5_2());
 
         JFrame frame = new JFrame("Graphics!");
        
