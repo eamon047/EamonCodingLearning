@@ -1,10 +1,10 @@
-public class Assignment4_1 {
+public class Book {
 
     String title;
     boolean borrowed = false;
 
     // Creates a new Book
-    public Assignment4_1(String bookTitle) {
+    public Book(String bookTitle) {
         // Implement this method
         title = bookTitle;
     }
@@ -35,7 +35,7 @@ public class Assignment4_1 {
 
     public static void main(String[] arguments) {
         // Small test of the Book class
-        Assignment4_1 example = new Assignment4_1("The Da Vinci Code");
+        Book example = new Book("The Da Vinci Code");
         System.out.println("Title (should be The Da Vinci Code): " + example.getTitle());
         System.out.println("Borrowed? (should be false): " + example.isBorrowed());
         example.rented();

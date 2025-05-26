@@ -1,4 +1,5 @@
-public class Assignment3 {
+package Assignment3;
+public class Marathon {
     public static void main(String[] args) {
         String[] names = {
             "Elena", "Thomas", "Hamilton", "Suzie", "Phil", "Matt", "Alex",

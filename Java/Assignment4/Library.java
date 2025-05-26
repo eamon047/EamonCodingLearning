@@ -1,11 +1,11 @@
-public class Assignment4_2 {
+public class Library {
     // Add the missing implementation to this class
     String address;
-    Assignment4_1[] books = new Assignment4_1[100];
+    Book[] books = new Book[100];
     int bookCount = 0;
     
 
-    public Assignment4_2(String library_name) {
+    public Library(String library_name) {
         address = library_name;
     }
 
@@ -17,7 +17,7 @@ public class Assignment4_2 {
         System.out.println(address);
     }
 
-    public void addBook(Assignment4_1 book) {
+    public void addBook(Book book) {
         if (bookCount < books.length) {
             books[bookCount] = book;
             bookCount++;
@@ -65,14 +65,14 @@ public class Assignment4_2 {
 
     public static void main(String[] args) {
         // Create two libraries
-        Assignment4_2 firstLibrary = new Assignment4_2("10 Main St.");
-        Assignment4_2 secondLibrary = new Assignment4_2("228 Liberty St.");
+        Library firstLibrary = new Library("10 Main St.");
+        Library secondLibrary = new Library("228 Liberty St.");
 
         // Add four books to the first library
-        firstLibrary.addBook(new Assignment4_1("The Da Vinci Code"));
-        firstLibrary.addBook(new Assignment4_1("Le Petit Prince"));
-        firstLibrary.addBook(new Assignment4_1("A Tale of Two Cities"));
-        firstLibrary.addBook(new Assignment4_1("The Lord of the Rings"));
+        firstLibrary.addBook(new Book("The Da Vinci Code"));
+        firstLibrary.addBook(new Book("Le Petit Prince"));
+        firstLibrary.addBook(new Book("A Tale of Two Cities"));
+        firstLibrary.addBook(new Book("The Lord of the Rings"));
 
         // Print opening hours and the addresses
         System.out.println("Library hours:");

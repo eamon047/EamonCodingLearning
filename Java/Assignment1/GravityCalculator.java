@@ -1,4 +1,5 @@
-public class Assignment1 {
+package Assignment1;
+public class GravityCalculator {
     public static void main(String[] args){
         double gravity = -9.81; // Earth's gravity in m/s^2
         double initialVelocity = 0.0;

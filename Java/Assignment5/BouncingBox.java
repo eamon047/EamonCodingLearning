@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class Assignment5_3 {
+public class BouncingBox {
     int x;
     int y;
     Color color;
@@ -16,7 +16,7 @@ public class Assignment5_3 {
      * Initialize a new box with its center located at (startX, startY), filled
      * with startColor.
      */
-    public Assignment5_3(int startX, int startY, Color startColor) {
+    public BouncingBox(int startX, int startY, Color startColor) {
         x = startX;
         y = startY;
         color = startColor;
@@ -39,11 +39,11 @@ public class Assignment5_3 {
         // We check the direction because if a box is placed near the wall, we would get "stuck"
         // rather than moving in the right direction
         if ((x - SIZE/2 <= 0 && xDirection < 0) ||
-                (x + SIZE/2 >= Assignment5_1.WIDTH && xDirection > 0)) {
+                (x + SIZE/2 >= SimpleDraw.WIDTH && xDirection > 0)) {
             xDirection = -xDirection;
         }
         if ((y - SIZE/2 <= 0 && yDirection < 0) ||
-                (y + SIZE/2 >= Assignment5_1.HEIGHT && yDirection > 0)) {
+                (y + SIZE/2 >= SimpleDraw.HEIGHT && yDirection > 0)) {
             yDirection = -yDirection;
         }
     }
