@@ -1,0 +1,1 @@
+export const DEFAULT_ASSESSMENT_YEAR = '2025';
