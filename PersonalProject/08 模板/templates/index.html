@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='UTF-8'>
+    <title>Title</title>
+</head>
+<body>
+<p>用户名: {{ user|upper }}</p>
+<p>年龄: {{ age }}</p>
+<p>四大名著: {{ books }}</p>
+
+<ul>
+    <li> {{ books.0 }}</li>
+    <li> {{ books.1 }}</li>
+    <li> {{ books.2 }}</li>
+    <li> {{ books.3 }}</li>
+</ul>
+
+<p>姓名：{{ info.name }}</p>
+<p>年龄：{{ info.age }}</p>
+<p>性别：{{ info.ginder }}</p>
+
+<p>pi的值(保留三位小数): {{ pai|round(3) }}</p>
+
+<hr>
+
+<p>影视区(取决于用户年龄)</p>
+
+{% if age > 18 %}
+    <ul>
+        {% for movie in movies.restricted_movie %}
+        <li>{{ movie }}</li>
+        {% endfor %}
+    </ul>
+
+{% else %}
+    <ul>
+        {% for movie in movies.non_restricted_movie %}
+        <li>{{ movie }}</li>
+        {% endfor %}
+    </ul>
+
+{% endif %}
+
+<ul>
+    {% for book in books %}
+    <li>{{ book }}</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

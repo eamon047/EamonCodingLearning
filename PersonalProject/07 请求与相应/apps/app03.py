@@ -27,7 +27,7 @@ class Data(BaseModel):
     data: List[User]
 
 # 路径函数中声明不属于路径参数的参数，就是查询参数
-@app03.post("/user")
+@app03.post("/user03")
 async def user(user: User):
     print(user.name)
     print(user.model_dump())
